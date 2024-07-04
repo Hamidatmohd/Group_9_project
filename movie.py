@@ -5,7 +5,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import difflib
 
 # Load movies data
-movies_data = pd.read_csv(r"C:\Users\user\Documents\TAB\movies.csv")  # Replace with your path
+movies_data = pd.read_csv("movies.csv")  # Replace with your path
 
 # Selected features
 selected_features = ["genres", "keywords", "tagline", "cast", "director"]
@@ -29,7 +29,7 @@ def recommend_movies(movie_name):
     list_of_all_titles = movies_data["title"].tolist()
     find_close_match = difflib.get_close_matches(movie_name, list_of_all_titles)
     if not find_close_match:
-        return "Movie not found!"
+        return "We couldn't get you a recommendation based on your favourite movie, Please search again!"
     close_match = find_close_match[0]
     index_of_the_movie = movies_data[movies_data.title == close_match]["index"].values[0]
     similarity_score = list(enumerate(similarity[index_of_the_movie]))
